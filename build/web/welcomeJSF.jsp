@@ -18,9 +18,9 @@
         <body>
             <h1><h:outputText value="JavaServer Faces"/></h1>
             <h:form>
-                <h:selectBooleanCheckbox id="mainCheckBox"/>
+                <h:selectBooleanCheckbox id="mainCheckBox" value="#{ScratchProject.checkBox}"/>
                 <br/>
-                <h:commandButton value="submit"></h:commandButton>
+                <h:commandButton value="submit" action="#{ScratchProject.checkState()}"></h:commandButton>
             </h:form>
         </body>
     </html>
