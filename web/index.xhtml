@@ -21,6 +21,35 @@
             <br/>
             <h:commandButton action="#{scratchBean.save}" value="upload"/>
         </h:form>
+        <br/>
+        <br/>
+
+
+        <h:form id="disappearingField">
+            <h:selectOneRadio onclick="onClickAuth();" value="#{scratchBean.hiddenField}" >
+                <f:selectItem id="YesAuth" itemValue="true" itemLabel ="Yes"/>
+                <f:selectItem itemValue="false" itemLabel = "No"/>
+            </h:selectOneRadio>
+            <h:inputText id="unHideThisField" value="#{scratchBean.subDate}" >
+                <f:convertDateTime pattern="mm-dd-yyyy hh:mm:ss"/>
+            </h:inputText>
+            <h:commandButton action="result" value="checkState" type="submit"/>
+        </h:form>
     </h:body>
+    <script>
+        function onClickAuth() {
+            "use strict"
+            if (document.getElementById("disappearingField:j_idt15:0").checked) {
+                document.getElementById("disappearingField:unHideThisField").disabled = false
+                //document.getElementById("disappearingField:unHideThisField").style = ("")
+            }
+            else {
+                document.getElementById("disappearingField:unHideThisField").disabled = true
+                //document.getElementById("disappearingField:unHideThisField").style = ("display:none;");
+            }
+        }
+        onClickAuth();
+
+    </script>
 </html>
 
