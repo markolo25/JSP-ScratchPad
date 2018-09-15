@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -76,7 +77,6 @@ public class scratchBean implements Serializable {
 
     /*disabled/hidden Date Field*/
     private Date subDate;
-    private Date modDate;
     private boolean hiddenField;
 
     public Date getSubDate() {
@@ -86,8 +86,7 @@ public class scratchBean implements Serializable {
     public void setSubDate(Date subDate) {
         if (subDate != null) {
             this.subDate = subDate;
-        }
-        else{
+        } else {
             this.subDate = new Date();
         }
     }
@@ -105,17 +104,22 @@ public class scratchBean implements Serializable {
     }
 
     public void setSubStringTime(String time) {
-        try {
-            this.modDate = new SimpleDateFormat("mmddyyhhmmss").parse(new SimpleDateFormat("mmddyy").format(this.subDate) + time);
-        } catch (ParseException ex) {
-            Logger.getLogger(scratchBean.class.getName()).log(Level.SEVERE, null, ex);
+        String[] hhmmss = time.split("(?<=\\G..)");
+        if (hhmmss.length == 3) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(this.getSubDate());
+            cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hhmmss[0]));
+            cal.set(Calendar.MINUTE, Integer.parseInt(hhmmss[1]));
+            cal.set(Calendar.SECOND, Integer.parseInt(hhmmss[2]));
+            this.setSubDate(cal.getTime());
+        } else {
+            System.out.println("Input incorrect");
         }
-
     }
 
     public String getTestSetSubStringTIme() {
-        this.setSubStringTime("112233");
-        return this.modDate.toString();
+        this.setSubStringTime("212223");
+        return this.getSubDate().toString();
     }
 
 }

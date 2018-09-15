@@ -31,7 +31,7 @@
                 <f:selectItem itemValue="false" itemLabel = "No"/>
             </h:selectOneRadio>
             <h:inputText id="unHideThisField" value="#{scratchBean.subDate}" >
-                <f:convertDateTime pattern="mm-dd-yyyy hh:mm:ss"/>
+                <f:convertDateTime pattern="MM-dd-yyyy HH:mm:ss" timeZone="PST"/>
             </h:inputText>
             <h:commandButton action="result" value="checkState" type="submit"/>
         </h:form>
@@ -39,7 +39,7 @@
     <script>
         function onClickAuth() {
             "use strict"
-            if (document.getElementById("disappearingField:j_idt15:0").checked) {
+            if (document.getElementById("disappearingField:j_idt15:0").checked) { //Check the Yes Box on the radio buttons
                 document.getElementById("disappearingField:unHideThisField").disabled = false
                 //document.getElementById("disappearingField:unHideThisField").style = ("")
             }
@@ -48,7 +48,7 @@
                 //document.getElementById("disappearingField:unHideThisField").style = ("display:none;");
             }
         }
-        onClickAuth();
+        onClickAuth(); //Run the function
 
     </script>
 </html>
