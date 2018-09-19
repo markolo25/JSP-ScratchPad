@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Facelet Title</title>      
+        <link rel="stylesheet" href=" css/bootstrap.min.css"/>
     </h:head>
     <h:body>
         Hello from Facelets
@@ -35,20 +36,51 @@
             </h:inputText>
             <h:commandButton action="result" value="checkState" type="submit"/>
         </h:form>
+
+
+        <h:form id="bootstrapDateTimePicker">
+            <div class="container">
+                <div class="row">
+                    <div class='col-sm-8'>
+                        <h:inputText id="bootStrapDateTimeField" value="#{scratchBean.subDate}">
+                            <f:convertDateTime pattern="MM-dd-yyyy HH:mm:ss" timeZone="PST"/>
+                        </h:inputText>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+
     </h:body>
+    <script type="text/javascript" src="js/jquery.js"/>
+    <script type="text/javascript" src="js/moment.js"/>
+    <script type="text/javascript" src="js/bootstrap.min.js"/>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.js"/>
     <script>
-        function onClickAuth() {
-            "use strict"
-            if (document.getElementById("disappearingField:j_idt15:0").checked) { //Check the Yes Box on the radio buttons
-                document.getElementById("disappearingField:unHideThisField").disabled = false
-                //document.getElementById("disappearingField:unHideThisField").style = ("")
-            }
-            else {
-                document.getElementById("disappearingField:unHideThisField").disabled = true
-                //document.getElementById("disappearingField:unHideThisField").style = ("display:none;");
-            }
-        }
-        onClickAuth(); //Run the function
+                function onClickAuth() {
+                    "use strict";
+                    if (document.getElementById("disappearingField:j_idt15:0").checked) { //Check the Yes Box on the radio buttons
+                        document.getElementById("disappearingField:unHideThisField").style = ("");
+                    } else {
+                        document.getElementById("disappearingField:unHideThisField").style = ("display:none;");
+                        document.getElementById("disappearingField:unHideThisField").value = "";
+                    }
+                }
+                onClickAuth(); //Run the function 
+                
+                //Minimum viable product
+                $("#bootstrapDateTimePicker\\:bootStrapDateTimeField").datetimepicker();
+                
+                
+                //Would be nice if i got it to work
+                dateTimePicker("bootstrapDateTimePicker:bootStrapDateTimeField")
+                
+                function dateTimePicker(elem){
+                    var input = "#" + (elem.replace(":","\\\\:"));
+                    $(input.valueOf()).datetimepicker();
+                }
+
 
     </script>
 </html>
